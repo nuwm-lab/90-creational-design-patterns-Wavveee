@@ -1,18 +1,23 @@
-﻿using System;
+﻿// Program.cs
+using System;
 
-namespace LabWork
+public class Program
 {
-    // Даний проект є шаблоном для виконання лабораторних робіт
-    // з курсу "Об'єктно-орієнтоване програмування та патерни проектування"
-    // Необхідно змінювати і дописувати код лише в цьому проекті
-    // Відео-інструкції щодо роботи з github можна переглянути 
-    // за посиланням https://www.youtube.com/@ViktorZhukovskyy/videos 
-    class Program
+    public static void Main()
     {
-        static void Main(string[] args)
-        {
-            
-            Console.WriteLine("Hello World!");
-        }
+        // Створення та ініціалізація компонентів
+        StandardProgramBuilder builder = new StandardProgramBuilder();
+        ProgramDirector director = new ProgramDirector { Builder = builder };
+
+        // 1. Використання Керівника
+        director.BuildBeginnerProgram();
+        EducationalProgram beginnerProgram = builder.GetProgram();
+        beginnerProgram.ShowDetails();
+
+        // 2. Використання Будівельника без Керівника
+        builder.SetTitle("Кастомний Курс з AI");
+        // ... (виклики SetDuration, SelectSubject, etc.)
+        EducationalProgram customProgram = builder.GetProgram();
+        customProgram.ShowDetails();
     }
 }
