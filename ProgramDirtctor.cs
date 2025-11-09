@@ -1,27 +1,46 @@
-// ProgramDirector.cs
-using System;
-
-public class ProgramDirector
+namespace EducationalPrograms
 {
-    private IProgramBuilder _builder;
+    using System;
 
-    public IProgramBuilder Builder
+    // Керівник (Director) - для створення типових конфігурацій
+    public class ProgramDirector
     {
-        set { _builder = value; }
-    }
+        private IProgramBuilder? _builder; // Використовуємо nullable type
 
-    // Метод для створення типової програми для початківців
-    public void BuildBeginnerProgram()
-    {
-        // ... (повна логіка конструювання програми)
-        _builder.SetTitle("Вступ до IT");
-        _builder.SetDuration(8);
-        // ...
-    }
+        // Використовуємо метод SetBuilder замість публічної властивості без геттера
+        public void SetBuilder(IProgramBuilder builder)
+        {
+            _builder = builder;
+        }
 
-    // Метод для створення типової програми для професіоналів
-    public void BuildAdvancedProgram()
-    {
-        // ... (повна логіка конструювання програми)
+        // Метод створення типової програми для початківців
+        public void BuildBeginnerProgram()
+        {
+            // Перевірка на null
+            if (_builder == null) throw new InvalidOperationException("Будівельник не встановлено.");
+            
+            _builder.Reset();
+            _builder.SetTitle("Вступ до Програмування");
+            _builder.SetDuration(8);
+            _builder.SetDifficulty("Початковий");
+            _builder.SelectSubject("Основи C#");
+            _builder.SelectSubject("Введення в GIT");
+            _builder.SelectSubject("Алгоритми для початківців");
+        }
+
+        // Метод створення типової програми для професіоналів
+        public void BuildAdvancedProgram()
+        {
+            // Перевірка на null
+            if (_builder == null) throw new InvalidOperationException("Будівельник не встановлено.");
+
+            _builder.Reset();
+            _builder.SetTitle("Просунута Хмарна Архітектура");
+            _builder.SetDuration(20);
+            _builder.SetDifficulty("Експертний");
+            _builder.SelectSubject("Розподілені Транзакції");
+            _builder.SelectSubject("Паттерни Мікросервісів");
+            _builder.SelectSubject("CI/CD та DevOps");
+        }
     }
 }

@@ -1,10 +1,15 @@
-// IProgramBuilder.cs
-public interface IProgramBuilder
+namespace EducationalPrograms
 {
-    void Reset(); // Додано Reset до інтерфейсу для чистоти
-    void SetTitle(string title);
-    void SelectSubject(string subject);
-    void SetDuration(int weeks);
-    void SetDifficulty(string level);
-    EducationalProgram GetProgram();
+    // Інтерфейс Будівельника
+    public interface IProgramBuilder
+    {
+        void Reset();
+        void SetTitle(string title);
+        void SelectSubject(string subject);
+        void SetDuration(int weeks);
+        void SetDifficulty(string level);
+        
+        // Повертає готовий продукт
+        EducationalProgram GetProgram();
+    }
 }
